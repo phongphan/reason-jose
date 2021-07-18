@@ -25,14 +25,14 @@ let jwks_suite, _ =
                      keys =
                        [
                          Jose.Jwk.of_pub_pem Fixtures.rsa_test_pub
-                         |> CCResult.get_exn;
+                         |> CCResult.get_exn
                        ];
                    }));
           Alcotest.test_case "Creates a correct JWKs from JSON" `Quick
             (fun () ->
               let jwks = Jose.Jwks.of_string expected_jwks_string in
               let jwk =
-                Jose.Jwks.find_key jwks Fixtures.public_jwk_kid |> CCOpt.get_exn
+                Jose.Jwks.find_key jwks Fixtures.public_jwk_kid |> CCOpt.get_exn_or "Key not found"
               in
               check_option_string "correct kid" Fixtures.public_jwk_kid
                 (Jose.Jwk.get_kid jwk));
@@ -47,7 +47,7 @@ let jwks_suite, _ =
               let jwks = Jose.Jwks.of_string microsoft_jwks_string in
               check_option_string "Should find key" microsoft_jwk_kid
                 (Jose.Jwks.find_key jwks microsoft_jwk_kid
-                |> CCOpt.get_exn |> Jose.Jwk.get_kid));
+                |> CCOpt.get_exn_or "Key not found" |> Jose.Jwk.get_kid));
         ] );
     ]
 

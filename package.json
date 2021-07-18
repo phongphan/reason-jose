@@ -32,7 +32,7 @@
   "devDependencies": {
     "@opam/alcotest": "*",
     "@opam/bisect_ppx": "^2.3.0",
-    "@opam/containers": "*",
+    "@opam/containers": ">=3.4",
     "@opam/lwt": "*",
     "@opam/merlin": "*",
     "@opam/ocamlformat": "*",
